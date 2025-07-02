@@ -6,6 +6,6 @@ ENV KC_HTTP_ENABLED=true
 
 COPY ./providers /opt/keycloak/providers
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["start-dev"]
