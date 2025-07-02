@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.2.5
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: ADMIN_admin123
+      
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://auth-database-do-user-23562320-0.g.db.ondigitalocean.com:25060/defaultdb?sslmode=require
+      KC_DB_USERNAME: doadmin
+      KC_DB_PASSWORD: AVNS_OIu8w3C4Q9Yph8m-e6K
+      
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HTTP_ENABLED: true
+      
+      KC_HEALTH_ENABLED: true
+      KC_METRICS_ENABLED: true
+
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./providers:/opt/keycloak/providers
+    networks:
+      - keycloak-network
+    restart: unless-stopped
+    command: ["start-dev"]
+
+networks:
+  keycloak-network:
+    driver: bridge
