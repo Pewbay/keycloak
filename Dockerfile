@@ -2,10 +2,11 @@ FROM quay.io/keycloak/keycloak:26.2.5
 
 # Set non-sensitive configs
 ENV KC_DB=postgres
+ENV KC_HOSTNAME_PROVIDER=v2
 ENV KC_HOSTNAME_STRICT=false
 ENV KC_HTTP_ENABLED=true
 ENV KC_HTTP_PORT=80
-ENV KC_PROXY=edge
+ENV KC_PROXY_MODE=edge
 ENV KC_METRICS_ENABLED=true
 ENV KC_HEALTH_ENABLED=true
 
