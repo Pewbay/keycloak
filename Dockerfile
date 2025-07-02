@@ -5,7 +5,7 @@ ENV KC_DB=postgres
 ENV KC_HOSTNAME_PROVIDER=v2
 ENV KC_HOSTNAME_STRICT=false
 ENV KC_HTTP_ENABLED=true
-ENV KC_HTTP_PORT=8080
+ENV KC_HTTP_PORT=80
 ENV KC_PROXY_HEADERS=xforwarded
 ENV KC_METRICS_ENABLED=true
 ENV KC_HEALTH_ENABLED=true
@@ -19,13 +19,13 @@ RUN rm -rf /opt/keycloak/conf/cache/* \
 
 # Set up health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=120s \
-    CMD curl -f http://localhost:8080/health || exit 1
+    CMD curl -f http://localhost:80/health || exit 1
 
 # Run as non-root user
 USER 1000
 
 # Expose ports
-EXPOSE 8080
+EXPOSE 80
 
 # Start in production mode with optimized build
 CMD ["start", "--optimized"]
