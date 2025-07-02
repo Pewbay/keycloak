@@ -12,6 +12,9 @@ ENV KC_HEALTH_ENABLED=true
 # Install custom providers (if any)
 COPY ./providers /opt/keycloak/providers/
 
+# Build optimized server first (required before --optimized)
+RUN /opt/keycloak/bin/kc.sh build
+
 # Set up health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s \
     CMD curl -f http://localhost:8080/health || exit 1
@@ -22,5 +25,5 @@ USER 1000
 # Expose ports
 EXPOSE 8080
 
-# Start in production mode (optimized build)
+# Start in production mode with optimized build
 CMD ["start", "--optimized"]
