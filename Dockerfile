@@ -28,4 +28,6 @@ USER 1000
 EXPOSE 80
 
 # Start in production mode with optimized build
-CMD ["start", "--optimized"]
+CMD ["start", "--optimized", \
+    "--spi-required-action-VERIFY_EMAIL_CODE-code-length=6", \
+    "--spi-required-action-VERIFY_EMAIL_CODE-code-symbols=0123456789"]
