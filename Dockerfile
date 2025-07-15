@@ -1,6 +1,5 @@
 FROM quay.io/keycloak/keycloak:26.2.5
 
-# Set non-sensitive configs
 ENV KC_DB=postgres
 ENV KC_HOSTNAME_PROVIDER=v2
 ENV KC_HOSTNAME_STRICT=false
@@ -10,7 +9,6 @@ ENV KC_PROXY_HEADERS=xforwarded
 ENV KC_METRICS_ENABLED=true
 ENV KC_HEALTH_ENABLED=true
 
-# Install custom providers (if any)
 COPY ./providers /opt/keycloak/providers/
 
 # Clear build cache and rebuild
@@ -24,10 +22,8 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=120s \
 # Run as non-root user
 USER 1000
 
-# Expose ports
 EXPOSE 80
 
-# Start in production mode with optimized build
 CMD ["start", "--optimized", \
     "--spi-required-action-VERIFY_EMAIL_CODE-code-length=6", \
     "--spi-required-action-VERIFY_EMAIL_CODE-code-symbols=0123456789"]
