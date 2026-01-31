@@ -53,9 +53,6 @@ services:
     container_name: nginx
     ports:
       - "80:80"
-    # depends_on:
-    #   keycloak:
-    #     condition: service_healthy
     networks:
       - keycloak-network
     restart: unless-stopped
